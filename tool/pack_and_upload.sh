@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# 打包压缩包，并且上传至远程主机
+# 需要：
+# 打包
+# 压缩
+# 上传
+
+FILE_NAME=centos-set-default-boot-mode
+PACK_IN_FILES_PATH=./dist/
+PACK_IN_FILES_FILE=*.sh
+PACK_OUT_PATH=./
+PACK_OUT_FILE=$FILE_NAME.tar
+#删除某个包
+rm -rf $PACK_OUT_PATH$PACK_OUT_FILE
+#创建某个包
+tar -cf $PACK_OUT_PATH$PACK_OUT_FILE $PACK_IN_FILES_PATH$PACK_IN_FILES_FILE
+#添加某文件
+tar -rf $PACK_OUT_FILE ./docs
+tar -rf $PACK_OUT_FILE ./help
+#更新某文件
+#tar -uf $PACK_OUT_FILE ./dist/$FILE_NAME.sh
+#列出其文件
+tar -tf $PACK_OUT_FILE
+
+GZIP_IN_FILE=$PACK_OUT_PATH$PACK_OUT_FILE
+GZIP_OUT_FILE=$GZIP_IN_FILE.gz
+# 删除压缩包
+rm -rf $GZIP_OUT_FILE
+# 压缩某个包
+gzip --keep $GZIP_IN_FILE
+
+#上传:本地主机->远程主机
+PRIVITE_KEY_FILE_NAME=google-clound-ssr
+PRIVITE_KEY_FILE_PATH=~/.ssh/
+# 公钥文件名字
+PUBLIC_KEY_FILE_NAME=${PRIVITE_KEY_FILE_NAME}.pub
+# SSH服务所在主机地址
+SSH_SERVER_IP=192.168.2.3
+# SSH服务所在主机账号
+#SSH_SERVER_USER=yemiancheng
+SSH_SERVER_USER=root
+
+#LOCAL_FILE=$GZIP_IN_FILE
+LOCAL_FILE=$GZIP_OUT_FILE
+REMOTE_DIR=/root
+scp -i ${PRIVITE_KEY_FILE_PATH}${PRIVITE_KEY_FILE_NAME} $LOCAL_FILE $SSH_SERVER_USER@$SSH_SERVER_IP:$REMOTE_DIR
