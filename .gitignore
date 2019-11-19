@@ -1,3 +1,5 @@
 dev/
 debug-log.txt
 debug/
+*.tar
+*.tar.gz
