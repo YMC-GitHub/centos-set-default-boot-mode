@@ -40,7 +40,11 @@ case $BOOT_MODE in
   ;;
 esac
 #重启电脑
-reboot
+IS_REBOOT=$(echo "$REBOOT" | tr "[:lower:]" "[:upper:]")
+if [ $IS_REBOOT = "TRUE" ]; then
+  reboot
+fi
+
 #### 参考文献
 # vmware CentOS7图形界面与命令行界面切换
 # https://blog.csdn.net/m0_37696990/article/details/81750849
