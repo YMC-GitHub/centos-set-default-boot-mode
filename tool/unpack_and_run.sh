@@ -44,4 +44,4 @@ rm -rf $GZIP_OUT_FILE
 #删除解压包
 #rm -rf ./shell/$FILE_NAME
 #退出该窗口
-#exit 0
+exit 0
