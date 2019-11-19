@@ -217,7 +217,7 @@ esac
 IS_REBOOT=$(echo "$REBOOT" | tr "[:upper:]" "[:lower:]")
 if [[ $IS_REBOOT == "true" ]]; then
   #echo "reboot"
-  #reboot
+  reboot
 fi
 #### 参考文献
 # vmware CentOS7图形界面与命令行界面切换
