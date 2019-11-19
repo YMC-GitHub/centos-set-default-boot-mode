@@ -205,11 +205,11 @@ MODE=$(echo "$MODE" | tr "[:upper:]" "[:lower:]")
 
 case $MODE in
 'm' | 'multi-user')
-  #echo "boot_as_cli_mode"
+  echo "run boot_as_cli_mode"
   boot_as_cli_mode
   ;;
 'g' | 'graphical')
-  #echo "boot_as_cli_mode"
+  echo "run boot_as_cli_mode"
   boot_as_gui_mode
   ;;
 esac
@@ -217,8 +217,8 @@ esac
 #重启电脑
 IS_REBOOT=$(echo "$REBOOT" | tr "[:upper:]" "[:lower:]")
 if [[ $IS_REBOOT == "true" ]]; then
-  #echo "reboot"
-  #reboot
+  echo "reboot the machine"
+  reboot
 fi
 #### 参考文献
 # vmware CentOS7图形界面与命令行界面切换
